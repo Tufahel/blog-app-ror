@@ -5,7 +5,8 @@ RSpec.describe Like, type: :model do
     before(:each) do
       @user = User.new(name: 'Lilly', photo: 'https://unsplash.com/photos/F_-0BxGuVvo', bio: 'Teacher from Poland.',
                        posts_counter: 0)
-      @post = Post.new(author: @user, title: 'Hello', text: 'This is my first post', likes_counter: 0, comments_counter: 0)
+      @post = Post.new(author: @user, title: 'Hello', text: 'This is my first post', likes_counter: 0,
+                       comments_counter: 0)
       @like = Like.new(author_id: 3, post_id: 1)
     end
 

@@ -9,13 +9,14 @@
         <% end %>
         <% if post.recent_comments.length > 0 %>
             <% post.recent_comments.each do |comment| %>
-                <%= comment.user.name %> <br>
+                <%= comment.author.name %> <br>
                 <%= comment.text %> <br>
             <% end %>
         <% else %>
             "No comments"
         <% end %>
     <% end %>
+    <button><%= link_to "Pagination", user_posts_path(@user.id) %></button>
 <% else %>
     "No posts yet"
 <% end %>

@@ -2,6 +2,10 @@
 <p>List of users.</p> 
 <% @all_users.each do |user| %>
     <%= link_to user_path(user.id) do %>
-        <%= render partial: "user_list", locals: {user: user} %>
+        Name: <%= user.name %> <br>
     <% end %>
+    Bio: <%= user.bio %> <br>
+    PostsCounter: <% user.posts.count %> <br>
+    Image: <img src="<%= user.photo %>" alt="" width="200" height="150" /> <br>
+    Image Link: <%= user.photo %> <br> <br>
 <% end %>

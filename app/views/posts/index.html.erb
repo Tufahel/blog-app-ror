@@ -1,22 +1,26 @@
-<h1>Posts List</h1>
-<p>List of posts for a given user.</p> 
-
 <%= render partial: "users/user_list", locals: {user: @user} %>
 <% if @user.posts.length > 0 %>
     <% @user.posts.each_with_index do |post, id| %>
-        <%= link_to user_post_path(@user.id, post.id) do %>
+        <%= link_to user_post_path(@user.id, post.id), :class => "text-link-and-color" do %>
             <% render partial: "post_list", locals: {post: post, track: id} %>
         <% end %>
         <% if post.recent_comments.length > 0 %>
+        <div class="card mx-2 p-2">
             <% post.recent_comments.each do |comment| %>
-                <%= comment.author.name %> <br>
-                <%= comment.text %> <br>
+                <p><%= comment.author.name %> : <%= comment.text %></p>
             <% end %>
+        </div>
         <% else %>
-            "No comments"
+            <div class="card mx-2 p-2">
+                <p>No comments</p>
+            </div>
         <% end %>
     <% end %>
-    <button><%= link_to "Pagination", user_posts_path(@user.id) %></button>
+    <div class="text-center my-2">
+        <button class="btn btn-primary"><%= link_to "Pagination", user_posts_path(@user.id), :class => "btn-customize" %></button>
+    </div>
 <% else %>
-    "No posts yet"
+    <div class="card mx-2 p-2">
+        <p>No posts yet</p>
+    </div>
 <% end %>

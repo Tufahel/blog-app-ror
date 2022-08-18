@@ -1,2 +1,5 @@
-Post: <%= post.id %> <br>
-Text: <%= post.text.length < 100 ? post.text : "No post yet" %> <br>
+<div class="my-2 mx-2 card p-2">
+        <h5> Post: #<%= post.id %> </h5>
+        <p class="text-start"> <%= post.text.length < 100 ? post.text : "No post yet" %> <p>
+        <p class="text-end">Comments: <%= post.comments.length %> Likes: <%= post.likes.length %> </p>
+</div>

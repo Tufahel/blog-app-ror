@@ -1,5 +1,8 @@
-Name: <%= user.name %> <br>
-Bio: <%= user.bio %> <br>
-PostsCounter: <%= user.posts.count %> <br>
-Image: <img src="<%= user.photo %>" alt="" width="200" height="150" /> <br>
-Image Link: <%= user.photo %> <br> <br>
+<div class="d-flex my-2 mx-2">
+    <img src="<%= user.photo %>" alt="" width="200" height="150" /> <br>
+    <div class="card w-100 mx-1 p-2">
+        <h2 class="text-start"><%= user.name %></h2>
+        <p class="text-end">Number of posts: <%= user.posts.count %></p>
+    </div>
+</div>
+

@@ -13,15 +13,17 @@
  *= require_tree .
  *= require_self
  */
- .btn-customize{
-    color: white;
-    text-decoration: none;
- }
- .btn-customize:hover {
-    font-weight: bold;
-    color: white;
- }
- .text-link-and-color{
-    text-decoration: none !important;
-    color: blue;
- }
+.btn-customize {
+  color: white;
+  text-decoration: none;
+}
+
+.btn-customize:hover {
+  font-weight: bold;
+  color: white;
+}
+
+.text-link-and-color {
+  text-decoration: none !important;
+  color: blue;
+}

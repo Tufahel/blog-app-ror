@@ -1,3 +1,13 @@
 <h1>User</h1>
 <p>Show details of an user.</p> 
 <%= render partial: "user_list", locals: {user: @user} %> 
+
+<% if @user.recent_posts.length > 0 %>
+    <% @user.recent_posts.each_with_index do |post, id| %>
+        <%= link_to user_post_path(post.id) do %>
+            <%= render partial: "posts/post_list", locals: {post: post, post_number: id += 1} %>
+        <% end %>
+    <% end %>
+<% else %>
+    <%= "No post yet" %>
+<% end %> 

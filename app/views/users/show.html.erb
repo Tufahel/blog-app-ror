@@ -5,7 +5,7 @@
 <% if @user.recent_posts.length > 0 %>
     <% @user.recent_posts.each_with_index do |post, id| %>
         <%= link_to user_post_path(post.id) do %>
-            <%= render partial: "posts/post_list", locals: {post: post, post_number: id += 1} %>
+            <%= render partial: "posts/post_list", locals: {post: post, track: id} %>
         <% end %>
     <% end %>
 <% else %>

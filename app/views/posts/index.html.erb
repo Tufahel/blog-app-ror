@@ -1,2 +1,21 @@
 <h1>Posts List</h1>
 <p>List of posts for a given user.</p> 
+
+<%= render partial: "users/user_list", locals: {user: @user} %>
+<% if @user.posts.length > 0 %>
+    <% @user.posts.each_with_index do |post, id| %>
+        <%= link_to user_post_path(@user.id, post.id) do %>
+            <% render partial: "post_list", locals: {post: post, track: id} %>
+        <% end %>
+        <% if post.recent_comments.length > 0 %>
+            <% post.recent_comments.each do |comment| %>
+                <%= comment.user.name %> <br>
+                <%= comment.text %> <br>
+            <% end %>
+        <% else %>
+            "No comments"
+        <% end %>
+    <% end %>
+<% else %>
+    "No posts yet"
+<% end %>

@@ -1,2 +1,17 @@
 <h1>Post</h1>
-<p>Show details of post for users.</p> 
+<p>Show details of post for users.</p>
+
+Id: <%= "#{@post.id + 1} by #{@post.author.name}" %> <br>
+Post: <%= @post.text %> <br>
+
+
+<% if @comments.length > 0 %>
+    <% @comments.each do |comment| %>
+        <br>
+        Time: <%= comment.updated_at %> <br>
+        Name: <%= comment.author.name %> <br>
+        Comment: <%= comment.text %> <br>
+    <% end %>
+<% else %>
+    No comment yet
+<% end %>

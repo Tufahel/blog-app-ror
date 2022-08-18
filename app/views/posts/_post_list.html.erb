@@ -1,2 +1,2 @@
-Post: <%= "#{post_number}" %> <br>
-Text: <%= post.text %> <br>
+Post: <%= post.id %> <br>
+Text: <%= post.text.length < 100 ? post.text : "No post yet" %> <br>

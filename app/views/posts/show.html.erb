@@ -1,2 +1,17 @@
-<h1>Post</h1>
-<p>Show details of post for users.</p> 
+<div class="card my-2 mx-2 p-2">
+    <p class="text-start">Post: <%= "#{@post.id} by #{@post.author.name}" %></p>
+    <p class="text-end">Comments: <%= @post.comments.length %> Likes: <%= @post.likes.length %> </p>
+    <p><%= @post.text %> <br></p>
+</div>
+<div class="card mx-2 p-2">
+<% if @comments.length > 0 %>
+    <% @comments.each do |comment| %>
+
+            <p><%= comment.author.name %> : <%= comment.text %></p>
+        
+    <% end %>
+</div>
+<% else %>
+    No comment yet
+<% end %>
+

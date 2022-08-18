@@ -1,2 +1,26 @@
-<h1>User</h1>
-<p>Show details of an user.</p> 
+<%= render partial: "user_list", locals: {user: @user} %>
+<div class="mx-2">
+    <div class="card w-100 p-2">
+        <h5>Bio</h5>
+        <%= @user.bio %> <br>
+    </div>
+</div>
+
+<% if @user.recent_posts.length > 0 %>
+    <% @user.recent_posts.each_with_index do |post, id| %>
+        <div class="my-2 mx-2 card p-2">
+            <%= link_to user_post_path(@user.id, post.id), :class => "text-link-and-color" do %>
+                <h5> Post: #<%= post.id %> </h5>
+            <% end %>
+                <p class="text-start"> <%= post.text.length < 100 ? post.text : "No post yet" %> <p>
+                <p class="text-end">Comments: <%= post.comments.length %> Likes: <%= post.likes.length %> </p>
+        </div>
+    <% end %>
+<% else %>
+    <div class="card mx-2 my-2 p-2">
+        <p>No posts yet</p>
+    </div>
+<% end %> 
+<div class="text-center my-2">
+    <button class="btn btn-primary"><%= link_to "See all posts", user_posts_path(@user.id) , :class => "btn-customize" %></button>
+</div>

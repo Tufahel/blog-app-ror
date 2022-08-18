@@ -9,7 +9,7 @@
 <% if @user.recent_posts.length > 0 %>
     <% @user.recent_posts.each_with_index do |post, id| %>
         <div class="my-2 mx-2 card p-2">
-            <%= link_to user_post_path(post.id), :class => "text-link-and-color" do %>
+            <%= link_to user_post_path(@user.id, post.id), :class => "text-link-and-color" do %>
                 <h5> Post: #<%= post.id %> </h5>
             <% end %>
                 <p class="text-start"> <%= post.text.length < 100 ? post.text : "No post yet" %> <p>

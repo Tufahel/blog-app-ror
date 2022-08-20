@@ -3,6 +3,8 @@
     <p class="text-end">Comments: <%= @post.comments.length %> Likes: <%= @post.likes.length %> </p>
     <p><%= @post.text %> <br></p>
 </div>
+
+Comments:
 <div class="card mx-2 p-2">
 <% if @comments.length > 0 %>
     <% @comments.each do |comment| %>
@@ -14,4 +16,8 @@
 <% else %>
     No comment yet
 <% end %>
+
+<div class="text-center my-2">
+    <%= link_to "Add new comment", new_user_post_comment_path(user_id: @post.author_id, post_id: @post.id ), class: "btn btn-primary" %>
+</div>
 

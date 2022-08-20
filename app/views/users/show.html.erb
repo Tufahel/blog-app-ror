@@ -1,4 +1,5 @@
 <%= render partial: "user_list", locals: {user: @user} %>
+<%= link_to "Add new post", new_user_post_path(@user), class: "btn btn-primary mx-2 my-2" %>
 <div class="mx-2">
     <div class="card w-100 p-2">
         <h5>Bio</h5>

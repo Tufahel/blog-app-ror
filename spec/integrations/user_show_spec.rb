@@ -9,11 +9,11 @@ RSpec.describe 'Testing user show page', type: :feature do
     #     @post = Post.create(title: "Post #{num}", text: "This is my #{num} post",
     #         likes_counter: 0, comments_counter: 0, id: "#{num}" )
     # end
-    Post.create(title: 'Title1', text: 'This is my 7 post', author_id: @first.id, 
-        likes_counter: 0, comments_counter: 0, id: 1)
-    Post.create(title: 'Title2', text: 'This is my 8 post', author_id: @first.id, 
-            likes_counter: 0, comments_counter: 0, id: 2)
-    Post.create(title: 'Title3', text: 'This is my 9 post', author_id: @first.id, 
+    Post.create(title: 'Title1', text: 'This is my 7 post', author_id: @first.id,
+                likes_counter: 0, comments_counter: 0, id: 1)
+    Post.create(title: 'Title2', text: 'This is my 8 post', author_id: @first.id,
+                likes_counter: 0, comments_counter: 0, id: 2)
+    Post.create(title: 'Title3', text: 'This is my 9 post', author_id: @first.id,
                 likes_counter: 0, comments_counter: 0, id: 3)
 
     visit user_path(@first.id)
@@ -51,7 +51,7 @@ RSpec.describe 'Testing user show page', type: :feature do
     click_link 'See all posts'
     expect(page).to have_current_path user_posts_path(@first)
 
-    visit user_post_url('1','2')
+    visit user_post_url('1', '2')
     expect(page).to have_content 'Like'
   end
 
@@ -61,5 +61,4 @@ RSpec.describe 'Testing user show page', type: :feature do
 
     visit user_posts_path(@first.id)
   end
-
 end

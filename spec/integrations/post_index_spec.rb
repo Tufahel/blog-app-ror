@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe 'Posts show page', type: :feature do
   before(:each) do
     User.destroy_all
-    @user = User.create(name: 'Tufahel', photo: 'pic.png', bio: 'Developer from Bangladesh', 
+    @user = User.create(name: 'Tufahel', photo: 'pic.png', bio: 'Developer from Bangladesh',
                         posts_counter: 0)
     Post.create(title: 'Title', text: 'Text', author_id: @user.id,
                 likes_counter: 0, comments_counter: 0, id: 2)
@@ -23,7 +23,7 @@ RSpec.describe 'Posts show page', type: :feature do
       expect(page).to have_content 'Number of posts: 1'
     end
     scenario 'I can see the posts title.' do
-        expect(page).to have_content 'Title'
+      expect(page).to have_content 'Title'
     end
     scenario 'I can see the posts body.' do
       expect(page).to have_content 'Text'

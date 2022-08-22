@@ -1,7 +1,8 @@
 <div class="card my-2 mx-2 p-2">
-    <p class="text-start">Post: <%= "#{@post.id} by #{@post.author.name}" %></p>
+    <p class="text-start">Post <%= "#{@post.id}, by #{@post.author.name}" %></p>
     <p class="text-end">Comments: <%= @post.comments.length %> Likes: <%= @post.likes.length %> </p>
-    <p><%= @post.text %> <br></p>
+    <p>Title: <%= "#{@post.title}" %></p>
+    <p>Post: <%= @post.text %> <br></p>
 </div>
 
 <div>

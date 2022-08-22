@@ -1,0 +1,10 @@
+<h2 class="text-center">What's on your mind?</h2>
+<div class="form d-flex justify-content-center mt-4">
+  <%= form_with model: @post, url: user_posts_url, method: :post do |form| %>
+    <div class="form-group">
+      <%= form.text_field :title, :placeholder=> "Title" %> <br> <br>
+        <%= form.text_area :text, :placeholder=> "Write Something", cols: 40, rows: 10 %> <br> <br>
+          <%= form.submit "Submit" %>
+    </div>
+    <% end %>
+</div> 

@@ -3,27 +3,28 @@
     <p class="text-end">Comments: <%= @post.comments.length %> Likes: <%= @post.likes.length %> </p>
     <p>Title: <%= "#{@post.title}" %></p>
     <p>Post: <%= @post.text %> <br></p>
+    <% if can? :destroy, @post %>
+      <%= button_to "Delete post", [@post.author, @post], method: :delete, :class => "btn btn-danger" %>
+    <%end%>
 </div>
-
 <div>
     <div class="d-flex justify-content-center gap-4">
         <%= link_to "Add new comment", new_user_post_comment_url(user_id: @post.author_id, post_id: @post.id ), class: "btn btn-primary" %>
         <%= form_with model: @like, url: user_post_likes_url(post_id: @post.id) do |form| %>
-          <%= form.submit "Hit Like", class: "btn btn-danger" %>
+          <%= form.submit "Hit Like", class: "btn btn-success" %>
         <% end %>
     </div>
 </div>
-
 Comments:
 <div class="card mx-2 p-2">
 <% if @comments.length > 0 %>
     <% @comments.each do |comment| %>
-
             <p><%= comment.author.name %> : <%= comment.text %></p>
-        
+            <% if can? :destroy, comment %>
+                <%= button_to "Delete comment", user_post_comment_path(post_id: @post.id, id: comment.id), method: :delete, :class => "btn btn-danger" %>
+            <% end %>
     <% end %>
 </div>
 <% else %>
     No comment yet
 <% end %>
-

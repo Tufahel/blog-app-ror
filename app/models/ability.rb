@@ -6,8 +6,8 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
 
-    can :read, Post, public: true
-    can :read, Comment, public: true
+    can :read, Post
+    can :read, Comment
 
     return unless user.present? # additional permissions for logged in users (they can read their own posts)
 

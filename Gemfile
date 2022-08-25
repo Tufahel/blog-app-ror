@@ -7,6 +7,8 @@ gem 'devise'
 
 gem 'letter_opener', '~> 1.4', '>= 1.4.1'
 
+gem 'cancancan', '~> 1.9'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem 'rails', '~> 7.0.3'
 

@@ -17,13 +17,13 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @author = User.find(params[:user_id])
-    @post = @author.posts.find(params[:id])
-    @post.destroy
-    if @post.destroy
-      redirect_to user_path(params[:user_id])
+    puts params
+    @post = Post.find(params[:post_id])
+    @comment = @post.comments.find(params[:id])
+    if @comment.destroy
+      redirect_to user_post_url
     else
-      redirect_to user_posts_path(params[:user_id], params[:id])
+      redirect_to user_posts_url
     end
   end
 

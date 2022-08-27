@@ -1,25 +1,57 @@
 require 'swagger_helper'
 
-RSpec.describe 'api/users', type: :request do
-  path '/api/users' do
-    post 'Creates a new user' do
-      tags 'Users'
+describe 'Blog API' do
+  path '/users' do
+    post 'Creates a blog' do
+      tags 'Blogs'
       consumes 'application/json'
-      parameter name: :user, in: :body, schema: {
+      parameter name: :blog, in: :body, schema: {
         type: :object,
         properties: {
-          name: { type: :string },
-          email: { type: :string },
-          password: { type: :string },
-          password_confirmation: { type: :string }
+          title: { type: :string },
+          text: { type: :string }
         },
-        required: %w[name email password password_confirmation]
+        required: %w[title text]
       }
 
-      response '201', 'user created' do
-        let(:user) do
-          { name: 'John Doe', email: 'test@gmail.com', password: '12345678', password_confirmation: '12345678' }
-        end
+      response '201', 'blog created' do
+        let(:blog) { { title: 'foo', content: 'bar' } }
+        run_test!
+      end
+
+      response '422', 'invalid request' do
+        let(:blog) { { title: 'foo' } }
+        run_test!
+      end
+    end
+  end
+
+  path '/blogs/{id}' do
+    get 'Retrieves a blog' do
+      tags 'Blogs', 'Another Tag'
+      produces 'application/json', 'application/xml'
+      parameter name: :id, in: :path, type: :string
+
+      response '200', 'blog found' do
+        schema type: :object,
+               properties: {
+                 id: { type: :integer },
+                 title: { type: :string },
+                 text: { type: :string }
+               },
+               required: %w[id title text]
+
+        let(:id) { Blog.create(title: 'foo', content: 'bar').id }
+        run_test!
+      end
+
+      response '404', 'blog not found' do
+        let(:id) { 'invalid' }
+        run_test!
+      end
+
+      response '406', 'unsupported accept header' do
+        let(:Accept) { 'application/foo' }
         run_test!
       end
     end

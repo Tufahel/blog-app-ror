@@ -4,8 +4,8 @@ class Api::CommentsController < ApplicationController
     @post = @user.posts.find(params[:post_id])
     @comments = @post.comments
     render json: @comments
-
   end
+
   def create
     @comment = Comment.new(comment_params)
     @post = Post.find(params[:post_id])
@@ -18,9 +18,6 @@ class Api::CommentsController < ApplicationController
     else
       render :new, alert: 'An error occured'
     end
-
-
-
   end
 
   private
@@ -28,5 +25,4 @@ class Api::CommentsController < ApplicationController
   def comment_params
     params.require(:comment).permit(:text)
   end
-
 end

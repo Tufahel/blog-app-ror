@@ -4,6 +4,7 @@ class Api::PostsController < ApplicationController
     @posts = @user.posts
     render json: @posts
   end
+
   def show
     @user = User.find(params[:user_id])
     @posts = @user.posts.find(params[:id])

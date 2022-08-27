@@ -6,6 +6,8 @@ class Ability
     #
     user ||= User.new # guest user (not logged in)
 
+    
+    
     can :read, Post
     can :read, Comment
 

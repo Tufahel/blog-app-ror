@@ -14,11 +14,24 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '35455cfc0e2d8115d295af9b7c28acafcc48336465e2d103161a86e0b06dcb3324be06634da4217f02b95b361183168d27d0b064f6ecdfddc23922b5369e7339'
+  # config.secret_key = 'c6256ead94ac60c32045f2b8d7651f4591639734f3d31a681da15237adf4a8543152bd0291e0e92b0c681faa051afe4ffb25cd0d1e64b86bbf50eaf928373c1b'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
+
+  config.jwt do |jwt|
+    jwt.secret = Rails.application.secret_key_base  # Add this line in your production environment
+    # jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
+    # jwt.secret = Rails.application.credentials.devise[:jwt_secret_key] # Add this line in your development env
+    jwt.dispatch_requests = [
+      ['POST', %r{^users/sign_in$}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^users/sign_out$}]
+    ]
+    jwt.expiration_time = 15.day.to_i
+  end
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -46,7 +59,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [:email]
+  config.authentication_keys = [:username]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -126,7 +139,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'e558b02ceafb7e5f44c0f09ab004b5ee62d5a3f2351734d2e5d609dce1bfb83aaeb8172f9ecb2819a950f9b17488770193d954e0a8bafe412a75f5806a4990bb'
+  # config.pepper = 'c4185f20076076ee3df871b14cbdaa7003f9b2110efec15f047cbd9d13109434b041239d2db5eb51ef24fb582ed49fbef9c7a656aaa2a9262fd96fa3317c117f'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -308,6 +321,4 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-
-  config.navigational_formats = ['*/*', :html, :turbo_stream]
 end

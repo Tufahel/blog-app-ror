@@ -3,9 +3,9 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
-gem 'devise'
+gem 'rack-cors'
 
-gem 'letter_opener', '~> 1.4', '>= 1.4.1'
+gem 'devise'
 
 gem 'cancancan', '~> 1.9'
 
@@ -82,3 +82,13 @@ group :test do
 end
 
 gem 'ruby-lsp', '~> 0.2.3', group: :development
+
+# Rswag
+gem 'rswag'
+
+# Token gems
+gem 'jwt'
+
+gem 'devise-jwt'
+
+gem 'warden-jwt_auth'

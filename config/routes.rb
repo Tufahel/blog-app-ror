@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: 'json' } do
     get '/user-data', to: 'users#show'
     resources :users
+    resources :posts
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

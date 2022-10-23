@@ -1,18 +1,18 @@
 class Api::CommentsController < ApplicationController
   def index
-    @comment = Comment.all
-    render json: @comment
+    @comments = Comment.all
+    render json: @comments
   end
 
   def create
     @user = User.find(params[:user_id])
     @post = Post.find(params[:post_id])
     @comment = Comment.create(
-        text: comment_params[:text],
-        author_id: @user.id,
-        post_id: @post.id
-      )
-  
+      text: comment_params[:text],
+      author_id: @user.id,
+      post_id: @post.id
+    )
+
     render json: @comment
   end
 

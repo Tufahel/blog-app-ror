@@ -1,9 +1,0 @@
-<h2 class="text-center">Create new Comment</h2>
-<div class="form d-flex justify-content-center mt-4">
-  <%= form_with model: @comment, url: user_post_comments_path, method: :post do |form| %>
-    <div class="form-group">
-        <%= form.text_area :text, :placeholder=> "Write your comment", cols: 20, rows: 5 %> <br> <br>
-          <%= form.submit "Submit" %>
-    </div>
-    <% end %>
-</div> 

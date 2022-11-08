@@ -1,26 +1,19 @@
 Rails.application.routes.draw do
-  devise_for :users,
-             controllers: {
-               sessions: 'user/sessions',
-               registrations: 'user/registrations'
-             }
-
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
-  namespace :api do
-    resources :users, only: [:index, :show ] do
-      resources :posts, only: [:index, :show] do
-         resources :comments, only: [:index, :create]
+  devise_for :users, defaults: { format: 'json' },
+  controllers: {
+      sessions: 'users/sessions',
+      registrations: 'users/registrations'
+  }
+  namespace :api, defaults: { format: 'json' } do
+    get '/user-data', to: 'users#show'
+    resources :users do
+      resources :posts do
+        resources :comments
+        resources :likes
       end
     end
   end
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  root "users#index"
-  resources :users, only: [:index, :show] do
-     resources :posts, only: [:index, :show, :new, :create, :destroy] do
-      resources :comments, only: [:new, :create, :destroy]  
-      resources :likes, only: [:new, :create]
-    end
-  end
+  # Defines the root path route ("/")
 end

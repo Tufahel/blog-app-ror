@@ -14,11 +14,23 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '35455cfc0e2d8115d295af9b7c28acafcc48336465e2d103161a86e0b06dcb3324be06634da4217f02b95b361183168d27d0b064f6ecdfddc23922b5369e7339'
+  # config.secret_key = 'ea30767741ba2857c2f514ef32785d57da6879c9606d8dcfbb08d36ee822c923212ef02df749cc11dcdd2c7e3ed4c21fc3d6551bacbd0de717fd3de8c4e2f488'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
   # config.parent_controller = 'DeviseController'
+
+  config.jwt do |jwt|
+    jwt.secret = Rails.application.secret_key_base  # Add this line in your production environment
+    # jwt.secret = Rails.application.credentials.devise[:jwt_secret_key] # Add this line in your development env
+    jwt.dispatch_requests = [
+      ['POST', %r{^users/sign_in$}]
+    ]
+    jwt.revocation_requests = [
+      ['DELETE', %r{^users/sign_out$}]
+    ]
+    jwt.expiration_time = 15.day.to_i
+  end
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -126,7 +138,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 12
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = 'e558b02ceafb7e5f44c0f09ab004b5ee62d5a3f2351734d2e5d609dce1bfb83aaeb8172f9ecb2819a950f9b17488770193d954e0a8bafe412a75f5806a4990bb'
+  # config.pepper = 'f08ad8ce8ca9f6e7f09f3bf0cf50cc5d251e9f8a9288cf855ab75e9b1e3691c3fb77cdbb11884f86dc947ec82d2cf3d05a22ac20cfbadf68a36f1d6d793edd5c'
 
   # Send a notification to the original email when the user's email is changed.
   # config.send_email_changed_notification = false
@@ -308,14 +320,4 @@ Devise.setup do |config|
   # When set to false, does not sign a user in automatically after their password is
   # changed. Defaults to true, so a user is signed in automatically after changing a password.
   # config.sign_in_after_change_password = true
-  config.jwt do |jwt|
-    jwt.secret = ENV['DEVISE_JWT_SECRET_KEY']
-    jwt.dispatch_requests = [
-      ['POST', %r{^/sign_in$}]
-    ]
-    jwt.revocation_requests = [
-      ['DELETE', %r{^/sign_out$}]
-    ]
-    jwt.expiration_time = 15.day.to_i
-  end
 end
